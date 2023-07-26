@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <title>Magic Movie Machine</title>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Magic Movie Machine</h1>
+    </header>
+    <main class="flex flex-row border-2 columns-12">
+        <div id="mainSearch" class="container mx-auto px-5 border-2 content-center">
+            <textarea name="searchBar" id="searchBar" cols="20" rows="2" class="border-2"></textarea>
+            <button class="border-2">Search!</button>
+        </div>
+        <div id="searchParameters" class="container border-2">
+            <form id="parameterForm">
+                <input type="checkbox" id="movieType" name="movie" value="0">
+                <label for="movieType"> Movie </label>
+                <input type="checkbox" id="showType" name="Show" value="1">
+                <label for="showType"> Show </label>
+                <br>
+                <input type="checkbox" id="genreAction" name="Action" value="2">
+                <label for="1Start"> Movie </label>
+                <input type="checkbox" id="genreComedy" name="movie" value="1">
+                <label for="1Start"> Movie </label>
+                <input type="checkbox" id="movieType" name="movie" value="1">
+                <label for="1Start"> Movie </label>
+            </form>
+        </div>
+        <div id="nowShowing" class="container border-2">
+
+        </div>
+        <div id="searchResults" class="container border-2">
+
+        </div>
+
+
+    </main>
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
