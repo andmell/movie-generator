@@ -13,34 +13,49 @@
     <header class="header">
         <h1>Magic Movie Machine</h1>
     </header>
-    <main class="flex flex-row border-2 columns-12">
-        <div id="mainSearch" class="container mx-auto px-5 border-2 content-center">
-            <textarea name="searchBar" id="searchBar" cols="20" rows="2" class="border-2"></textarea>
-            <button id="searchbtn" class="border-2">Search!</button>
+    <main class="grid grid-cols-2 gap-4 py-20 mx-2">
+        <div id="mainSearch" class="px-5 border-2 px-20"> Main Search
+            <textarea name="searchBar" id="searchBar" cols="20" rows="2" class="border-2 w-full"></textarea>
+            <button id="searchbtn" class="border-2 content-center">Search!</button>
         </div>
-        <div id="searchParameters" class="container border-2">
+        <div id="nowShowing" class="container border-2"> Now Showing</div>
+        <!--need to append api data here-->
+        <div id="searchParameters" class="border-2">Search Parameters
             <form id="parameterForm">
                 <input type="checkbox" id="movieType" name="movie" value="0">
                 <label for="movieType"> Movie </label>
                 <input type="checkbox" id="showType" name="Show" value="1">
                 <label for="showType"> Show </label>
                 <br>
-                <input type="checkbox" id="genreAction" name="Action" value="2">
-                <label for="1Start"> Movie </label>
-                <input type="checkbox" id="genreComedy" name="movie" value="3">
-                <label for="1Start"> Movie </label>
-                <input type="checkbox" id="genreRomance" name="movie" value="4">
-                <label for="1Start"> Movie </label>
+                <label for="genre">Choose a genre:</label>
+                <select name="genre" id="genre" class="border-2">
+                    <option value="action">Action</option>
+                    <option value="romance">Romance</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="horror">Horror</option>
+                    <option value="science fiction">Science Fiction</option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                </select>
             </form>
+            <div class="slidecontainer"> Rating Minimum
+                <input type="range" min="10" max="100" value="5" class="slider" id="myRange">
+            </div>
         </div>
-        <div id="nowShowing" class="container border-2">
-
         </div>
-        <div id="searchResults" class="container border-2">
-
+        <div id="searchResults" class="container border-2 col-span-2">Search Results
         </div>
-
-
     </main>
     <script src="./assets/js/script.js"></script>
 </body>
