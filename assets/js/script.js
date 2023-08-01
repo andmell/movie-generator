@@ -4,9 +4,12 @@ var nowShowingDiv = document.querySelector('#nowShowing');
 var streamingDiv = document.querySelector('#searchResults');
 var searchResults = document.querySelector('#searchResults');
 let resultsCard = document.querySelector('#resultsCard');
+let rangeNumber = document.querySelector('#myRange');
+let ratingSelected = document.querySelector('#ratingSelected');
+
 
 searchButton.addEventListener('click', () => {
-	const streamAPI = 'https://streaming-availability.p.rapidapi.com/v2/search/basic?country=us&services=netflix%2Cprime.buy%2Chulu.addon.hbo%2Cpeacock.free&output_language=en&show_type=movie&genre=18&show_original_language=en&keyword=zombie';
+	const streamAPI = 'https://streaming-availability.p.rapidapi.com/v2/search/title?title=batman&country=us&show_type=movie&output_language=en';
 	fetch(streamAPI, {
 		method: 'GET',
 		headers: {
@@ -24,7 +27,7 @@ searchButton.addEventListener('click', () => {
 			streamingCard.innerHTML =
 				`<div id="resultsCard">
 		        <div id="resultsImage">
-		            <img src="${data.result[i].posterURLs}"/>
+		            <img src="${data.result[i].posterURLs[92]}"/>
 		        </div>
 		        <div id="resultsTop">
 		            <h3>${data.result[i].title}</h3>
