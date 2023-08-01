@@ -13,14 +13,33 @@
     <header class="header">
         <h1>Magic Movie Machine</h1>
     </header>
-    <main class="grid grid-cols-2 gap-4 py-20 mx-2">
-        <div id="mainSearch" class="px-5 border-2 px-20"> Main Search
-            <textarea name="searchBar" id="searchBar" cols="20" rows="2" class="border-2 w-full"></textarea>
-            <button id="searchbtn" class="border-2 content-center">Search!</button>
+    <main class="grid grid-cols-3 gap-4 py-10 mx-2">
+        <div id="mainSearch" class="grid px-10 border-2 place-content-center"> Main Search
+            <!-- need to set to static height -->
+            <textarea name="searchBar" id="searchBar" cols="20" rows="1" class="border-2 w-full"></textarea>
+            <button id="searchbtn" class="border-2 w-full max-h-fit mb-3">Search!</button>
         </div>
-        <div id="nowShowing" class="container border-2"> Now Showing</div>
+        <div id="nowShowing" class="container grid justify-center border-2"> Now Showing
+            <!-- need to set to static height, click for next page -->
+
+            <div id="movieCard">
+                <div id="movieImage">
+                </div>
+                <div id="cardTop">
+                    <h2>Title</h2>
+                    <h2>Rating</h2>
+                </div>
+                <div id="cardBot">
+                    <h3>Description</h3>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
         <!--need to append api data here-->
-        <div id="searchParameters" class="border-2">Search Parameters
+        <div id="searchParameters" class="border-2 p-1">Search Parameters 
+            <!-- need to set to static height -->
             <form id="parameterForm">
                 <input type="checkbox" id="movieType" name="movie" value="0">
                 <label for="movieType"> Movie </label>
@@ -50,11 +69,11 @@
                 </select>
             </form>
             <div class="slidecontainer"> Rating Minimum
-                <input type="range" min="10" max="100" value="5" class="slider" id="myRange">
+                <input type="range" min="10" max="100" value="50" class="slider" id="myRange">
             </div>
         </div>
         </div>
-        <div id="searchResults" class="container border-2 col-span-2">Search Results
+        <div id="searchResults" class="border-2 col-span-3 grid justify-center">Search Results
         </div>
     </main>
     <script src="./assets/js/script.js"></script>
