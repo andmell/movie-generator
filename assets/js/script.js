@@ -8,6 +8,73 @@ let rangeNumber = document.querySelector('#myRange');
 let ratingSelected = document.querySelector('#ratingSelected');
 let movieCheckbox = document.querySelector('#movieType');
 let seriesCheckbox = document.querySelector('#showType');
+let savedSearches = document.querySelector('#history-buttons')
+renderButtons();
+function saveSearch(movieTitle) {
+    const localRead = JSON.parse(localStorage.getItem("historyArray"));
+    if (!localRead || localRead.length === 0) {
+        localStorage.setItem("historyArray", JSON.stringify([movieTitle]))
+    } else if (localRead.includes(movieTitle)) {
+        var firstMovie = localRead.indexOf(movieTitle);
+        localRead.splice(firstMovie, 1);
+        localRead.push(movieTitle);
+        localStorage.setItem("historyArray", JSON.stringify(localRead));
+    } else {
+        localRead.push(movieTitle);
+        localStorage.setItem("historyArray", JSON.stringify(localRead));
+    }
+    renderButtons();
+}
+
+function renderButtons() {
+    savedSearches.innerHTML = '';
+    const localReadAgain = JSON.parse(localStorage.getItem("historyArray"))
+    if (localReadAgain){
+    for (var i = 0; i < localReadAgain.length; i++) {
+        var pastButton = document.createElement('button');
+        pastButton.textContent = localReadAgain[i];
+        pastButton.addEventListener('click', (e) => {
+            getNowPlaying(e.target.textContent);
+            // getForecast(e.target.textContent);
+        })
+        savedSearches.prepend(pastButton);
+    }}
+}
+function getNowPlaying(searchedMovie){
+	var showtimesURL = `https://api.themoviedb.org/3/search/movie?query=${searchedMovie}&vote_average.gte=10&overview=/`;
+	fetch(showtimesURL, {
+		headers: {
+			Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNmRlNGViNTc2ZTQxNjY2NzIxZjAxYTcxNGRkNDkwOCIsInN1YiI6IjY0Yzg0NGQxYzA0OGE5MDExY2Q3ZmZkNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gi21mwDNoFGGVyoJeEh7iCgHVuDxTYUNIMzvIDak_7I"
+		}
+	}).then(function (response) {
+		console.log(response)
+		return response.json();
+	}).then(function (data) {
+		console.log(data);
+		saveSearch(data.results[0].title);
+		nowShowingDiv.innerHTML = '';
+		for (var i = 0; i < data.results.length; i++) {
+			console.log(data.results.length)
+			movieCard = document.createElement('p');
+			movieCard.innerHTML =
+			`<div id="movieCard" class="border-2">
+			    <div id="movieImage">
+				<img src="https://image.tmdb.org/t/p/original/${data.results[i].poster_path}" class="object-scale-down h-48 w-96"/>
+			</div>
+			<div id="cardTop">
+				<h2>${data.results[i].title}</h2>
+				<h2>${data.results[i].vote_average}</h2>
+			</div>
+			<div id="cardBot">
+				<h3>${data.results[i].overview}</h3>
+			</div>
+		</div>`
+
+			nowShowingDiv.appendChild(movieCard);
+		}
+	})
+}
+
 
 function getType(){
 	if (movieCheckbox.checked && seriesCheckbox.checked){
@@ -74,38 +141,7 @@ function getStreaming(streamingInfo){
 // });
 
 searchButton.addEventListener('click', () => {
-	let searchedMovie = searchBar.value;
-	var showtimesURL = `https://api.themoviedb.org/3/search/movie?query=${searchedMovie}&vote_average.gte=10&overview=/`;
-	fetch(showtimesURL, {
-		headers: {
-			Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNmRlNGViNTc2ZTQxNjY2NzIxZjAxYTcxNGRkNDkwOCIsInN1YiI6IjY0Yzg0NGQxYzA0OGE5MDExY2Q3ZmZkNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gi21mwDNoFGGVyoJeEh7iCgHVuDxTYUNIMzvIDak_7I"
-		}
-	}).then(function (response) {
-		console.log(response)
-		return response.json();
-	}).then(function (data) {
-		console.log(data);
-		nowShowingDiv.innerHTML = '';
-		for (var i = 0; i < data.results.length; i++) {
-			console.log(data.results.length)
-			movieCard = document.createElement('p');
-			movieCard.innerHTML =
-			`<div id="movieCard" class="border-2">
-			    <div id="movieImage">
-				<img src="https://image.tmdb.org/t/p/original/${data.results[i].poster_path}" class="object-scale-down h-48 w-96"/>
-			</div>
-			<div id="cardTop">
-				<h2>${data.results[i].title}</h2>
-				<h2>${data.results[i].vote_average}</h2>
-			</div>
-			<div id="cardBot">
-				<h3>${data.results[i].overview}</h3>
-			</div>
-		</div>`
-
-			nowShowingDiv.appendChild(movieCard);
-		}
-	})
+	getNowPlaying(searchBar.value);
 })
 
 
