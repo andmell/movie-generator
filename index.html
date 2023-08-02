@@ -11,23 +11,31 @@
     <title>Magic Movie Machine</title>
 </head>
 
-<body>
-    <header class="header">
+<body class="">
+    <header class="header text-center text-red-800">
         <div class="marquee">
             <h1>.magic.movie.machine.</h1>
         </div>
         <p>"Bring movie magic from Hollywood to your home..."</p>
     </header>
     <main class="grid grid-cols-3 gap-4 py-10 mx-2">
-        <div id="mainSearch" class="rounded-2xl grid px-10 border-2 border-red-800 place-content-center">
+        <div id="mainSearch" class="shadow-lg rounded-2xl grid px-10 border-2 border-red-800 place-content-center">
             <!-- need to set to static height -->
             <textarea name="searchBar" id="searchBar" cols="20" rows="1"
                 class="border-red-800 border-2 w-full"></textarea>
-            <button id="searchbtn" class="border-red-800 border-2 w-full max-h-fit mt-3">Search!</button>
+            <button id="searchbtn"
+                class="border-red-800 border-2 w-full max-h-fit mt-3 hover:bg-red-200">Search!</button>
         </div>
-        <div id="nowShowing" class="rounded-2xl container grid justify-center border-red-800 border-2"> Now Showing
+        <div id="nowShowing" class="shadow-lg rounded-2xl container grid justify-center border-red-800 border-2"> Now
+            Showing
             <!-- need to set to static height, click for next page -->
+            <div id="rapidAPI" class="w-80 my-0 mx-auto"> Search for Rapid API
+                <!-- need to set to static height -->
+                <input name="searchBarRapid" id="searchBarRapid" class="border-2 w-full" />
+                <button id="searchbtnRapid" class="border-2 w-full max-h-fit mb-3">Search!</button>
 
+                <div id="history-buttons-Rapid" class="flex flex-col"></div>
+            </div>
             <div id="movieCard">
                 <div id="movieImage">
                 </div>
@@ -44,7 +52,7 @@
         </div>
 
         <!--need to append api data here-->
-        <div id="searchParameters" class="rounded-2xl border-2 border-red-800 p-1">Search Parameters
+        <div id="searchParameters" class="shadow-lg rounded-2xl border-2 border-red-800 p-1">Search Parameters
             <!-- need to set to static height -->
             <form id="parameterForm">
                 <input type="checkbox" id="movieType" name="movie" value="0">
@@ -350,7 +358,8 @@
 
         </div>
         </div>
-        <div id="searchResults" class="rounded-2xl border-red-800 border-2 col-span-3 grid justify-center">Search
+        <div id="searchResults" class="shadow-lg rounded-2xl border-red-800 border-2 col-span-3 grid justify-center">
+            Search
             Results
             <div id="resultsCard">
                 <div id="resultsImage">
