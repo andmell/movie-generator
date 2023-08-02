@@ -22,45 +22,45 @@ function getType(){
 }
 
 
-searchButton.addEventListener('click', () => {
-	getType();
-	console.log(getType());
-	let searchedMovie = searchBar.value;
-	const streamAPI = `https://streaming-availability.p.rapidapi.com/v2/search/title?title=${searchedMovie}&country=us&show_type=${getType()}&output_language=en`;
-    // title, shotype
-	fetch(streamAPI, {
-		method: 'GET',
-		headers: {
-			'X-RapidAPI-Key': '427fcc77demsh18662408cbc8325p1efa87jsn99cd4f6001b3',
-			'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
-		}
-	}).then(function (response) {
-		return response.json();
-	}).then(function (data) {
-		console.log(data);
-		resultsCard.innerHTML = '';
-		for (var i = 0; i < data.result.length; i++) {
-			console.log(data.result.length)
-			let streamingCard = document.createElement('p');
-			streamingCard.innerHTML =
-				`<div id="resultsCard">
-		        <div id="resultsImage">
-		            <img src="${data.result[i].posterURLs[92]}"/>
-		        </div>
-		        <div id="resultsTop">
-		            <h3>${data.result[i].title}</h3>
-						<h3>${data.result[i].imdbRating}</h3>
-		        </div>
-		        <div id="resultsBot">
-		            <h3>${data.result[i].streamingInfo.us}</h3>
-		        </div>
+// searchButton.addEventListener('click', () => {
+// 	getType();
+// 	console.log(getType());
+// 	let searchedMovie = searchBar.value;
+// 	const streamAPI = `https://streaming-availability.p.rapidapi.com/v2/search/title?title=${searchedMovie}&country=us&show_type=${getType()}&output_language=en`;
+//     // title, shotype
+// 	fetch(streamAPI, {
+// 		method: 'GET',
+// 		headers: {
+// 			'X-RapidAPI-Key': '427fcc77demsh18662408cbc8325p1efa87jsn99cd4f6001b3',
+// 			'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
+// 		}
+// 	}).then(function (response) {
+// 		return response.json();
+// 	}).then(function (data) {
+// 		console.log(data);
+// 		resultsCard.innerHTML = '';
+// 		for (var i = 0; i < data.result.length; i++) {
+// 			console.log(data.result.length)
+// 			let streamingCard = document.createElement('p');
+// 			streamingCard.innerHTML =
+// 				`<div id="resultsCard">
+// 		        <div id="resultsImage">
+// 		            <img src="${data.result[i].posterURLs[92]}"/>
+// 		        </div>
+// 		        <div id="resultsTop">
+// 		            <h3>${data.result[i].title}</h3>
+// 						<h3>${data.result[i].imdbRating}</h3>
+// 		        </div>
+// 		        <div id="resultsBot">
+// 		            <h3>${data.result[i].streamingInfo.us}</h3>
+// 		        </div>
 
-		    </div>`
+// 		    </div>`
 
-			resultsCard.appendChild(streamingCard);
-		}
-	})
-});
+// 			resultsCard.appendChild(streamingCard);
+// 		}
+// 	})
+// });
 
 searchButton.addEventListener('click', () => {
 	let searchedMovie = searchBar.value;
@@ -79,8 +79,9 @@ searchButton.addEventListener('click', () => {
 			console.log(data.results.length)
 			movieCard = document.createElement('p');
 			movieCard.innerHTML =
-			`<div id="movieCard">
+			`<div id="movieCard" class="border-2">
 			    <div id="movieImage">
+				<img src="https://image.tmdb.org/t/p/original/${data.results[i].poster_path}" class="object-scale-down h-48 w-96"/>
 			</div>
 			<div id="cardTop">
 				<h2>${data.results[i].title}</h2>
