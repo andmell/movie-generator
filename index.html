@@ -6,20 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
     <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/font/stylesheet.css">
+
     <title>Magic Movie Machine</title>
 </head>
 
 <body>
     <header class="header">
-        <h1>Magic Movie Machine</h1>
+        <div class="marquee">
+            <h1>.magic.movie.machine.</h1>
+        </div>
+        <p>"Bring movie magic from Hollywood to your home..."</p>
     </header>
     <main class="grid grid-cols-3 gap-4 py-10 mx-2">
-        <div id="mainSearch" class="grid px-10 border-2 place-content-center"> Main Search
+        <div id="mainSearch" class="rounded-2xl grid px-10 border-2 border-red-800 place-content-center">
             <!-- need to set to static height -->
-            <textarea name="searchBar" id="searchBar" cols="20" rows="1" class="border-2 w-full"></textarea>
-            <button id="searchbtn" class="border-2 w-full max-h-fit mb-3">Search!</button>
+            <textarea name="searchBar" id="searchBar" cols="20" rows="1"
+                class="border-red-800 border-2 w-full"></textarea>
+            <button id="searchbtn" class="border-red-800 border-2 w-full max-h-fit mt-3">Search!</button>
         </div>
-        <div id="nowShowing" class="container grid justify-center border-2"> Now Showing
+        <div id="nowShowing" class="rounded-2xl container grid justify-center border-red-800 border-2"> Now Showing
             <!-- need to set to static height, click for next page -->
 
             <div id="movieCard">
@@ -38,7 +44,7 @@
         </div>
 
         <!--need to append api data here-->
-        <div id="searchParameters" class="border-2 p-1">Search Parameters
+        <div id="searchParameters" class="rounded-2xl border-2 border-red-800 p-1">Search Parameters
             <!-- need to set to static height -->
             <form id="parameterForm">
                 <input type="checkbox" id="movieType" name="movie" value="0">
@@ -344,7 +350,8 @@
 
         </div>
         </div>
-        <div id="searchResults" class="border-2 col-span-3 grid justify-center">Search Results
+        <div id="searchResults" class="rounded-2xl border-red-800 border-2 col-span-3 grid justify-center">Search
+            Results
             <div id="resultsCard">
                 <div id="resultsImage">
                     <h3>Image Goes Here</h3>
