@@ -55,6 +55,7 @@ function getNowPlaying(searchedMovie){
 		nowShowingDiv.innerHTML = '';
 		for (var i = 0; i < data.results.length; i++) {
 			console.log(data.results.length)
+			if (data.results[i].original_language !== "en") continue;
 			movieCard = document.createElement('p');
 			movieCard.innerHTML =
 			`<div id="movieCard" class="border-2">
