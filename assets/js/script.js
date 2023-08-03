@@ -13,58 +13,46 @@ var searchBarRapid = document.querySelector('#searchBarRapid');
 let releaseYear = document.getElementById("releaseYear");
 let clearBtn = document.querySelector('#clearBtn');
 let genreDropdown = document.querySelector('#genre');
+renderButtons();
 
-// renderButtons();
 function saveSearch(movieTitle) {
-    const localRead = JSON.parse(localStorage.getItem("historyArray"));
-    if (!localRead || localRead.length === 0) {
-        localStorage.setItem("historyArray", JSON.stringify([movieTitle]))
-    } else if (localRead.includes(movieTitle)) {
-        var firstMovie = localRead.indexOf(movieTitle);
-        localRead.splice(firstMovie, 1);
-        localRead.push(movieTitle);
-        localStorage.setItem("historyArray", JSON.stringify(localRead));
-    } else {
-        localRead.push(movieTitle);
-        localStorage.setItem("historyArray", JSON.stringify(localRead));
-    }
-    // renderButtons();
+	const localRead = JSON.parse(localStorage.getItem("historyArray"));
+	if (!localRead || localRead.length === 0) {
+		localStorage.setItem("historyArray", JSON.stringify([movieTitle]))
+	} else if (localRead.includes(movieTitle)) {
+		var firstMovie = localRead.indexOf(movieTitle);
+		localRead.splice(firstMovie, 1);
+		localRead.push(movieTitle);
+		localStorage.setItem("historyArray", JSON.stringify(localRead));
+	} else {
+		localRead.push(movieTitle);
+		localStorage.setItem("historyArray", JSON.stringify(localRead));
+	}
+	renderButtons();
 }
 
-// function renderButtons() {
-//     savedSearches.innerHTML = '';
-//     const localReadAgain = JSON.parse(localStorage.getItem("historyArray"))
-//     if (localReadAgain){
-//     for (var i = 0; i < localReadAgain.length; i++) {
-//         var pastButton = document.createElement('button');
-//         pastButton.textContent = localReadAgain[i];
-//         pastButton.addEventListener('click', (e) => {
-//             getNowPlaying(e.target.textContent);
-//         })
-//         savedSearches.prepend(pastButton);
-//     }}
-// }
+function renderButtons() {
+	savedSearches.innerHTML = '';
+	const localReadAgain = JSON.parse(localStorage.getItem("historyArray"))
+	if (localReadAgain) {
+		for (var i = 0; i < localReadAgain.length; i++) {
+			var pastButton = document.createElement('button');
+			pastButton.textContent = localReadAgain[i];
+			pastButton.classList.add("btn", "border-red-800", "border-2", "w-full", "max-h-fit", "mt-1", "hover:bg-red-200", "mb-1", "rounded-2xl")
+			pastButton.addEventListener('click', (e) => {
+				getNowStreaming(e.target.textContent);
+			})
+			savedSearches.prepend(pastButton);
+		}
+	}
+}
 
-// function saveSearch(movieTitle) {
-//     const localRead = JSON.parse(localStorage.getItem("historyArray"));
-//     if (!localRead || localRead.length === 0) {
-//         localStorage.setItem("historyArray", JSON.stringify([movieTitle]))
-//     } else if (localRead.includes(movieTitle)) {
-//         var firstMovie = localRead.indexOf(movieTitle);
-//         localRead.splice(firstMovie, 1);
-//         localRead.push(movieTitle);
-//         localStorage.setItem("historyArray", JSON.stringify(localRead));
-//     } else {
-//         localRead.push(movieTitle);
-//         localStorage.setItem("historyArray", JSON.stringify(localRead));
-//     }
-//     renderButtons();
-// }
-function getNowStreaming(){
+
+function getNowStreaming() {
 	getType();
 	console.log(getType());
 	let searchedMovie = searchBarRapid.value;
-	// const streamAPI = `https://streaming-availability.p.rapidapi.com/v2/search/title?title=${searchedMovie}&country=us&show_type=${getType()}&output_language=en`;
+	const streamAPI = `https://streaming-availability.p.rapidapi.com/v2/search/title?title=${searchedMovie}&country=us&show_type=${getType()}&output_language=en`;
 	fetch(streamAPI, {
 		method: 'GET',
 		headers: {
@@ -75,12 +63,12 @@ function getNowStreaming(){
 		return response.json();
 	}).then(function (data) {
 		console.log(data);
+		saveSearch(data.result[0].title);
 		resultsCard.innerHTML = '';
 		for (var i = 0; i < data.result.length; i++) {
-			console.log(data.result.length)
 			let streamingCard = document.createElement('p');
 			streamingCard.innerHTML =
-				`<div id="resultsCard">
+				`<div id="resultsCard" class="border-2 rounded-2x1 border-red-800 text relative">
 		        <div id="resultsImage">
 		            <img src="${data.result[i].posterURLs[92]}"/>
 		        </div>
@@ -89,7 +77,7 @@ function getNowStreaming(){
 						<h3>${data.result[i].imdbRating}</h3>
 		        </div>
 		        <div id="resultsBot">
-		            ${getNowStreaming(data.result[i].streamingInfo.us)}
+		            ${getStreaming(data.result[i].streamingInfo.us)}
 		        </div>
 
 		    </div>`
@@ -100,22 +88,9 @@ function getNowStreaming(){
 };
 
 
-// function renderButtons() {
-//     savedSearches.innerHTML = '';
-//     const localReadAgain = JSON.parse(localStorage.getItem("historyArray"))
-//     if (localReadAgain){
-//     for (var i = 0; i < localReadAgain.length; i++) {
-//         var pastButton = document.createElement('button');
-//         pastButton.textContent = localReadAgain[i];
-//         pastButton.addEventListener('click', (e) => {
-//             getNowPlaying(e.target.textContent);
-//         })
-//         savedSearches.prepend(pastButton);
-//     }}
-// }
-function getNowPlaying(searchedMovie){
-	let ratingSelected = rangeNumber.value/10;
-	console.log(ratingSelected); 
+function getNowPlaying(searchedMovie) {
+	let ratingSelected = rangeNumber.value / 10;
+	console.log(ratingSelected);
 	let releaseYearValue = releaseYear.value
 	let Genre = genreDropdown.value;
 	console.log(Genre);
@@ -131,14 +106,13 @@ function getNowPlaying(searchedMovie){
 		return response.json();
 	}).then(function (data) {
 		console.log(data);
-		// saveSearch(data.results[0].title);
 		resultsCard.innerHTML = '';
 		for (var i = 0; i < data.results.length; i++) {
 			console.log(data.results.length)
 			if (data.results[i].original_language !== "en") continue;
 			movieCard = document.createElement('p');
 			movieCard.innerHTML =
-			`<div id="movieCard" class="border-2 rounded-2x1 border-red-800 text flex flex-wrap relative">
+				`<div id="movieCard" class="border-2 rounded-2x1 border-red-800 text flex flex-wrap relative">
 			    <div id="movieImage">
 				<img src="https://image.tmdb.org/t/p/original/${data.results[i].poster_path}" class="object-scale-down h-48 w-96"/>
 			</div>
@@ -157,29 +131,29 @@ function getNowPlaying(searchedMovie){
 }
 
 
-function getType(){
-	if (movieCheckbox.checked && seriesCheckbox.checked){
+function getType() {
+	if (movieCheckbox.checked && seriesCheckbox.checked) {
 		return "all"
-	} else if (movieCheckbox.checked){
+	} else if (movieCheckbox.checked) {
 		return "movie"
-	} else if (seriesCheckbox.checked){
+	} else if (seriesCheckbox.checked) {
 		return "series"
 	} else {
 		return "all"
-	}
-}
+	};
+};
 
-// function getStreaming(streamingInfo){
-// 	console.log('streaming info:')
-// 	let html = ``
-// 	for (const service in streamingInfo){
-// 		console.log(`${service}:`, streamingInfo[service])
-// 		html += `
-// 		<div><a href="${streamingInfo[service][0].link}">${service}</a></div>
-// 		`
-// 	}
-// 	return html
-// }
+function getStreaming(streamingInfo){
+	console.log('streaming info:')
+	let html = ``
+	for (const service in streamingInfo){
+		console.log(`${service}:`, streamingInfo[service])
+		html += `
+		<div><a href="${streamingInfo[service][0].link}">${service}</a></div>
+		`
+	}
+	return html
+}
 
 searchButton.addEventListener('click', () => {
 	// console.log(releaseYearValue);
@@ -187,9 +161,9 @@ searchButton.addEventListener('click', () => {
 })
 
 
-// searchButtonRapid.addEventListener("click", () => {
-// 	getNowStreaming();
-// });
+searchButtonRapid.addEventListener("click", () => {
+	getNowStreaming();
+});
 
 // searchBarRapid.addEventListener("keyup", (event) => {
 //     if (event.keyCode === 13) {
@@ -198,7 +172,7 @@ searchButton.addEventListener('click', () => {
 // });
 
 
-clearBtn.addEventListener('click', ()=>{
+clearBtn.addEventListener('click', () => {
 	localStorage.clear();
 	renderButtons();
 })
