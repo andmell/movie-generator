@@ -9,7 +9,6 @@ let ratingSelected = document.querySelector('#ratingSelected');
 let movieCheckbox = document.querySelector('#movieType');
 let seriesCheckbox = document.querySelector('#showType');
 let savedSearches = document.querySelector('#history-buttons');
-renderButtons();
 var searchButtonRapid = document.querySelector('#searchbtnRapid');
 var searchBarRapid = document.querySelector('#searchBarRapid');
 
@@ -39,7 +38,6 @@ function renderButtons() {
         pastButton.textContent = localReadAgain[i];
         pastButton.addEventListener('click', (e) => {
             getNowPlaying(e.target.textContent);
-            // getForecast(e.target.textContent);
         })
         savedSearches.prepend(pastButton);
     }}
@@ -65,7 +63,6 @@ function getNowStreaming(){
 	console.log(getType());
 	let searchedMovie = searchBarRapid.value;
 	const streamAPI = `https://streaming-availability.p.rapidapi.com/v2/search/title?title=${searchedMovie}&country=us&show_type=${getType()}&output_language=en`;
-    // title, showtype
 	fetch(streamAPI, {
 		method: 'GET',
 		headers: {
@@ -148,7 +145,6 @@ function renderButtons() {
         pastButton.textContent = localReadAgain[i];
         pastButton.addEventListener('click', (e) => {
             getNowPlaying(e.target.textContent);
-            // getForecast(e.target.textContent);
         })
         savedSearches.prepend(pastButton);
     }}
@@ -219,10 +215,6 @@ searchButton.addEventListener('click', () => {
 })
 
 
-// for query need title, overview, rating
-searchButton.addEventListener("click", () => {
-
-// for query need title, overview, rating
 searchButtonRapid.addEventListener("click", () => {
 	getNowStreaming();
 });
@@ -238,6 +230,3 @@ searchBar.addEventListener("keyup", (event) => {
         searchButton.click();
     }
 });
-
-
-// Update the current slider value (each time you drag the slider handle)
