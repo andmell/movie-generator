@@ -12,7 +12,7 @@
 </head>
 
 <body class="">
-    <header class="header text-center text-red-800">
+    <header class="header text-center text-red-800 border-2 rounded-2xl">
         <div class="marquee">
             <h1>.magic.movie.machine.</h1>
         </div>
@@ -20,9 +20,9 @@
     </header>
     <main class="grid grid-cols-2 gap-4 py-10 mx-2">
 
-        <div id="mainSearch" class="shadow-lg rounded-2xl grid pt-10 border-2 border-red-800 place-content-center">
+        <div id="mainSearch" class="searchContainer shadow-lg rounded-2xl grid pt-10 border-2 border-red-800 place-content-center">
             <!-- need to set to static height -->
-            <input name="searchBar" id="searchBar" cols="20" rows="1" class="border-red-800 border-2 w-full" />
+            <input name="searchBar" id="searchBar" cols="20" rows="1" class="border-red-800 border-2 w-full rounded-2xl" />
             <div id="yearrange">Release Year:
                 <select class="" name="releaseYear" aria-label="Select start year" id="releaseYear">
                     <option value="2023">2023</option>
@@ -151,20 +151,19 @@
                     <option value="1900">1900</option>
                 </select>
             <button id="searchbtn"
-                class="border-red-800 border-2 w-full max-h-fit mt-3 hover:bg-red-200">Search!</button>
-                <button class="border-red-800 border-2 w-full max-h-fit mt-3 hover:bg-red-200" id="clearBtn">Clear History</button>
+                class="btn border-red-800 border-2 w-full max-h-fit mt-3 hover:bg-red-200 rounded-2xl">Search!</button>
+                <button class="btn border-red-800 border-2 w-full max-h-fit mt-3 hover:bg-red-200 mb-3 rounded-2xl" id="clearBtn">Clear History</button>
             <div id="history-buttons" class="flex flex-col"></div>
             </div>
         </div>
-        <div id="nowShowing" class="shadow-lg rounded-2xl container grid justify-center border-red-800 border-2"> Now
-            Showing
+        <div id="nowShowing" class="searchContainer shadow-lg rounded-2xl container grid justify-center border-red-800 border-2"> 
+            <span class="text-xl">Now Showing</span> 
             <!-- need to set to static height, click for next page -->
             <div id="rapidAPI" class="w-80 my-0 mx-auto"> Search for Rapid API
                 <!-- need to set to static height -->
-                <input name="searchBarRapid" id="searchBarRapid" class="border-2 w-full" />
-                <button id="searchbtnRapid" class="border-2 w-full max-h-fit mb-3">Search!</button>
+                <input name="searchBarRapid" id="searchBarRapid" class="border-2 w-full rounded-2xl" />
+                <button id="searchbtnRapid" class="btn border-2 w-full max-h-fit my-3 rounded-2xl">Search!</button>
                 <form id="parameterForm">
-                    <input class="checkBox">
                     <input type="checkbox" class="checkBox" id="movieType" name="movie" value="movie">
                     <label for="movieType"> Movie </label>
                     <input type="checkbox" class="checkBox" id="showType" name="Show" value="series">

@@ -1,5 +1,14 @@
+:root{
+    background-color: #394867;
+}
+
 .header {
     font-family: movie_timesregular;
+    background-color: #F1F6F9;
+}
+
+.searchContainer{
+    background-color: #212A3E;
 }
 
 .header p {
@@ -9,6 +18,10 @@
 .marquee {
     height: 50px;
     position: relative;
+}
+
+.btn {
+    background-color: #F1F6F9;
 }
 
 .marquee h1 {
