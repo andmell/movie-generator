@@ -127,13 +127,13 @@ function getNowPlaying(searchedMovie){
 	}).then(function (data) {
 		console.log(data);
 		saveSearch(data.results[0].title);
-		nowShowingDiv.innerHTML = '';
+		resultsCard.innerHTML = '';
 		for (var i = 0; i < data.results.length; i++) {
 			console.log(data.results.length)
 			if (data.results[i].original_language !== "en") continue;
 			movieCard = document.createElement('p');
 			movieCard.innerHTML =
-			`<div id="movieCard" class="border-2 rounded-2x1 border-red-800">
+			`<div id="movieCard" class="border-2 rounded-2x1 border-red-800 text">
 			    <div id="movieImage">
 				<img src="https://image.tmdb.org/t/p/original/${data.results[i].poster_path}" class="object-scale-down h-48 w-96"/>
 			</div>
@@ -146,7 +146,7 @@ function getNowPlaying(searchedMovie){
 			</div>
 		</div>`
 
-			nowShowingDiv.appendChild(movieCard);
+			resultsCard.appendChild(movieCard);
 		}
 	})
 }
