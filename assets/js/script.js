@@ -100,6 +100,7 @@ function getNowStreaming(){
 	});
 };
 
+
 function getNowPlaying(searchedMovie){
 	var showtimesURL = `https://api.themoviedb.org/3/search/movie?query=${searchedMovie}&vote_average.gte=10&overview=/`;
 	fetch(showtimesURL, {
@@ -118,7 +119,9 @@ function getNowPlaying(searchedMovie){
 			if (data.results[i].original_language !== "en") continue;
 			movieCard = document.createElement('p');
 			movieCard.innerHTML =
+
 			`<div id="movieCard" class="border-2">
+
 			    <div id="movieImage">
 				<img src="https://image.tmdb.org/t/p/original/${data.results[i].poster_path}" class="object-scale-down h-48 w-96"/>
 			</div>
@@ -219,6 +222,15 @@ searchButton.addEventListener('click', () => {
 // for query need title, overview, rating
 searchButton.addEventListener("click", () => {
 
+// for query need title, overview, rating
+searchButtonRapid.addEventListener("click", () => {
+	getNowStreaming();
+});
+
+searchBar.addEventListener("keyup", (event) => {
+	if (event.keyCode === 13) {
+		searchButton.click();
+	}
 });
 
 searchBar.addEventListener("keyup", (event) => {
