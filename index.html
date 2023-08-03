@@ -20,6 +20,7 @@
     </header>
     <main class="grid grid-cols-2 gap-4 py-10 mx-2">
         <div id="mainSearch" class="searchContainer shadow-lg rounded-2xl container grid justify-center border-red-800 border-2">
+            <h2 class="text-xl">Discover a movie!</h2>
             <!-- need to set to static height -->
             <form id="parameterForm">
                 <br>
@@ -195,7 +196,7 @@
             </div>
         </div>
         <div id="nowShowing" class="searchContainer shadow-lg rounded-2xl container grid justify-center border-red-800 border-2"> 
-            <span class="text-xl">Now Showing</span> 
+            <span class="text-xl">Streaming Search</span> 
             <!-- need to set to static height, click for next page -->
             <div id="rapidAPI" class="w-80 my-0 mx-auto"> Search for : 
                 <!-- need to set to static height -->
@@ -204,7 +205,7 @@
                 <input type="checkbox" class="checkBox" id="showType" name="Show" value="series">
                 <label for="showType"> Show </label>
                 <input name="searchBarRapid" id="searchBarRapid" class="border-2 w-full rounded-2xl" />
-                <button id="searchbtnRapid" class="btn border-2 w-full max-h-fit my-3 rounded-2xl">Search!</button>
+                <button id="searchbtnRapid" class="btn border-red-800 border-2 w-full max-h-fit mt-3 hover:bg-red-200 mb-3 rounded-2xl">Search!</button>
                 <form id="parameterForm">
                     <!-- <br>
                     <label for="genre">Choose a genre:</label>
@@ -263,7 +264,9 @@
         <div id="searchResults" class="shadow-lg rounded-2xl border-red-800 border-2 col-span-3 text-center">
             Search
             Results
-            <div id="resultsCard" class = "text-left"></div>
+            <div id="resultsCard" class = "text-left border-2 rounded-2x1 border-red-800 text relative">
+
+            </div>
         </div>
     </main>
     <script src="./assets/js/script.js"></script>
