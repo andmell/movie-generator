@@ -9,7 +9,6 @@ let ratingSelected = document.querySelector('#ratingSelected');
 let movieCheckbox = document.querySelector('#movieType');
 let seriesCheckbox = document.querySelector('#showType');
 let savedSearches = document.querySelector('#history-buttons');
-renderButtons();
 var searchButtonRapid = document.querySelector('#searchbtnRapid');
 var searchBarRapid = document.querySelector('#searchBarRapid');
 
@@ -39,7 +38,6 @@ function renderButtons() {
         pastButton.textContent = localReadAgain[i];
         pastButton.addEventListener('click', (e) => {
             getNowPlaying(e.target.textContent);
-            // getForecast(e.target.textContent);
         })
         savedSearches.prepend(pastButton);
     }}
@@ -217,11 +215,16 @@ searchButton.addEventListener('click', () => {
 
 
 // for query need title, overview, rating
-searchButton.addEventListener("click", () => {
-
+searchButtonRapid.addEventListener("click", () => {
+	getNowStreaming();
 });
 
 searchBar.addEventListener("keyup", (event) => {
+    if (event.keyCode === 13) {
+        searchButton.click();
+    }
+});
+searchBarRapid.addEventListener("keyup", (event) => {
     if (event.keyCode === 13) {
         searchButton.click();
     }
