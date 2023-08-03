@@ -1,5 +1,4 @@
 var searchButton = document.querySelector("#searchbtn");
-var searchBar = document.querySelector('#searchBar');
 var nowShowingDiv = document.querySelector('#nowShowing');
 var streamingDiv = document.querySelector('#searchResults');
 var searchResults = document.querySelector('#searchResults');
@@ -13,8 +12,9 @@ var searchButtonRapid = document.querySelector('#searchbtnRapid');
 var searchBarRapid = document.querySelector('#searchBarRapid');
 let releaseYear = document.getElementById("releaseYear");
 let clearBtn = document.querySelector('#clearBtn');
+let genreDropdown = document.querySelector('#genre');
 
-renderButtons();
+// renderButtons();
 function saveSearch(movieTitle) {
     const localRead = JSON.parse(localStorage.getItem("historyArray"));
     if (!localRead || localRead.length === 0) {
@@ -28,38 +28,38 @@ function saveSearch(movieTitle) {
         localRead.push(movieTitle);
         localStorage.setItem("historyArray", JSON.stringify(localRead));
     }
-    renderButtons();
+    // renderButtons();
 }
 
-function renderButtons() {
-    savedSearches.innerHTML = '';
-    const localReadAgain = JSON.parse(localStorage.getItem("historyArray"))
-    if (localReadAgain){
-    for (var i = 0; i < localReadAgain.length; i++) {
-        var pastButton = document.createElement('button');
-        pastButton.textContent = localReadAgain[i];
-        pastButton.addEventListener('click', (e) => {
-            getNowPlaying(e.target.textContent);
-        })
-        savedSearches.prepend(pastButton);
-    }}
-}
+// function renderButtons() {
+//     savedSearches.innerHTML = '';
+//     const localReadAgain = JSON.parse(localStorage.getItem("historyArray"))
+//     if (localReadAgain){
+//     for (var i = 0; i < localReadAgain.length; i++) {
+//         var pastButton = document.createElement('button');
+//         pastButton.textContent = localReadAgain[i];
+//         pastButton.addEventListener('click', (e) => {
+//             getNowPlaying(e.target.textContent);
+//         })
+//         savedSearches.prepend(pastButton);
+//     }}
+// }
 
-function saveSearch(movieTitle) {
-    const localRead = JSON.parse(localStorage.getItem("historyArray"));
-    if (!localRead || localRead.length === 0) {
-        localStorage.setItem("historyArray", JSON.stringify([movieTitle]))
-    } else if (localRead.includes(movieTitle)) {
-        var firstMovie = localRead.indexOf(movieTitle);
-        localRead.splice(firstMovie, 1);
-        localRead.push(movieTitle);
-        localStorage.setItem("historyArray", JSON.stringify(localRead));
-    } else {
-        localRead.push(movieTitle);
-        localStorage.setItem("historyArray", JSON.stringify(localRead));
-    }
-    renderButtons();
-}
+// function saveSearch(movieTitle) {
+//     const localRead = JSON.parse(localStorage.getItem("historyArray"));
+//     if (!localRead || localRead.length === 0) {
+//         localStorage.setItem("historyArray", JSON.stringify([movieTitle]))
+//     } else if (localRead.includes(movieTitle)) {
+//         var firstMovie = localRead.indexOf(movieTitle);
+//         localRead.splice(firstMovie, 1);
+//         localRead.push(movieTitle);
+//         localStorage.setItem("historyArray", JSON.stringify(localRead));
+//     } else {
+//         localRead.push(movieTitle);
+//         localStorage.setItem("historyArray", JSON.stringify(localRead));
+//     }
+//     renderButtons();
+// }
 function getNowStreaming(){
 	getType();
 	console.log(getType());
@@ -100,22 +100,27 @@ function getNowStreaming(){
 };
 
 
-function renderButtons() {
-    savedSearches.innerHTML = '';
-    const localReadAgain = JSON.parse(localStorage.getItem("historyArray"))
-    if (localReadAgain){
-    for (var i = 0; i < localReadAgain.length; i++) {
-        var pastButton = document.createElement('button');
-        pastButton.textContent = localReadAgain[i];
-        pastButton.addEventListener('click', (e) => {
-            getNowPlaying(e.target.textContent);
-        })
-        savedSearches.prepend(pastButton);
-    }}
-}
+// function renderButtons() {
+//     savedSearches.innerHTML = '';
+//     const localReadAgain = JSON.parse(localStorage.getItem("historyArray"))
+//     if (localReadAgain){
+//     for (var i = 0; i < localReadAgain.length; i++) {
+//         var pastButton = document.createElement('button');
+//         pastButton.textContent = localReadAgain[i];
+//         pastButton.addEventListener('click', (e) => {
+//             getNowPlaying(e.target.textContent);
+//         })
+//         savedSearches.prepend(pastButton);
+//     }}
+// }
 function getNowPlaying(searchedMovie){
+	let ratingSelected = rangeNumber.value/10;
+	console.log(ratingSelected); 
 	let releaseYearValue = releaseYear.value
-	let showtimesURL = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc`
+	let Genre = genreDropdown.value;
+	console.log(Genre);
+	let voteCount = 1;
+	let showtimesURL = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_year=${releaseYearValue}&sort_by=popularity.desc&vote_average.gte=${ratingSelected}&vote_count.gte=100&with_genres=${Genre}`
 	// var showtimesURL = `https://api.themoviedb.org/3/search/movie?query=${searchedMovie}&vote_average.gte=7&primary_release_year=${releaseYearValue}&overview=/`;
 	fetch(showtimesURL, {
 		headers: {
@@ -126,7 +131,7 @@ function getNowPlaying(searchedMovie){
 		return response.json();
 	}).then(function (data) {
 		console.log(data);
-		saveSearch(data.results[0].title);
+		// saveSearch(data.results[0].title);
 		resultsCard.innerHTML = '';
 		for (var i = 0; i < data.results.length; i++) {
 			console.log(data.results.length)
@@ -178,7 +183,7 @@ function getType(){
 
 searchButton.addEventListener('click', () => {
 	// console.log(releaseYearValue);
-	getNowPlaying(searchBar.value);
+	getNowPlaying();
 })
 
 
@@ -186,19 +191,14 @@ searchButton.addEventListener('click', () => {
 // 	getNowStreaming();
 // });
 
+// searchBarRapid.addEventListener("keyup", (event) => {
+//     if (event.keyCode === 13) {
+//         searchButton.click();
+//     }
+// });
+
+
 clearBtn.addEventListener('click', ()=>{
 	localStorage.clear();
 	renderButtons();
 })
-
-searchBar.addEventListener("keyup", (event) => {
-	if (event.keyCode === 13) {
-		searchButton.click();
-	}
-});
-
-searchBar.addEventListener("keyup", (event) => {
-    if (event.keyCode === 13) {
-        searchButton.click();
-    }
-});
