@@ -73,8 +73,8 @@ function getNowStreaming() {
 		            <img src="${data.result[i].posterURLs[92]}"/>
 		        </div>
 		        <div id="resultsTop">
-		            <h3>${data.result[i].title}</h3>
-						<h3>${data.result[i].imdbRating}</h3>
+		            <h3>Title: ${data.result[i].title}</h3>
+						<h3> IMDB Rating: ${data.result[i].imdbRating}</h3>
 		        </div>
 		        <div id="resultsBot">
 		            ${getStreaming(data.result[i].streamingInfo.us)}
