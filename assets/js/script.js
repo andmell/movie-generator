@@ -12,7 +12,7 @@ let savedSearches = document.querySelector('#history-buttons');
 var searchButtonRapid = document.querySelector('#searchbtnRapid');
 var searchBarRapid = document.querySelector('#searchBarRapid');
 let releaseYear = document.getElementById("releaseYear");
-
+let clearBtn = document.querySelector('#clearBtn');
 
 renderButtons();
 function saveSearch(movieTitle) {
@@ -176,7 +176,7 @@ function getNowPlaying(searchedMovie){
 			</div>
 			<div id="cardTop">
 				<h2>${data.results[i].title}</h2>
-				<h2>${data.results[i].vote_average}</h2>
+				<h2>IMDB Rating: ${data.results[i].vote_average}</h2>
 			</div>
 			<div id="cardBot">
 				<h3>${data.results[i].overview}</h3>
@@ -201,17 +201,17 @@ function getType(){
 	}
 }
 
-function getStreaming(streamingInfo){
-	console.log('streaming info:')
-	let html = ``
-	for (const service in streamingInfo){
-		console.log(`${service}:`, streamingInfo[service])
-		html += `
-		<div><a href="${streamingInfo[service][0].link}">${service}</a></div>
-		`
-	}
-	return html
-}
+// function getStreaming(streamingInfo){
+// 	console.log('streaming info:')
+// 	let html = ``
+// 	for (const service in streamingInfo){
+// 		console.log(`${service}:`, streamingInfo[service])
+// 		html += `
+// 		<div><a href="${streamingInfo[service][0].link}">${service}</a></div>
+// 		`
+// 	}
+// 	return html
+// }
 
 searchButton.addEventListener('click', () => {
 	// console.log(releaseYearValue);
@@ -222,6 +222,11 @@ searchButton.addEventListener('click', () => {
 searchButtonRapid.addEventListener("click", () => {
 	getNowStreaming();
 });
+
+clearBtn.addEventListener('click', ()=>{
+	localStorage.clear();
+	renderButtons();
+})
 
 searchBar.addEventListener("keyup", (event) => {
 	if (event.keyCode === 13) {
