@@ -14,18 +14,20 @@
         <h1>Magic Movie Machine</h1>
     </header>
     <main class="grid grid-cols-3 gap-4 py-10 mx-2">
-        <div id="mainSearch" class="w-80 my-0 mx-auto"> Main Search
+        <div id="mainSearch" class="grid px-10 border-2 place-content-center"> Main Search
             <!-- need to set to static height -->
-            <input name="searchBar" id="searchBar" class="border-2 w-full" />
+            <textarea name="searchBar" id="searchBar" cols="20" rows="1" class="border-2 w-full"></textarea>
             <button id="searchbtn" class="border-2 w-full max-h-fit mb-3">Search!</button>
-
-            <div id="history-buttons" class="flex flex-col"></div>
         </div>
-
-
         <div id="nowShowing" class="container grid justify-center border-2 "> Now Showing
             <!-- need to set to static height, click for next page -->
-
+            <div id="rapidAPI" class="w-80 my-0 mx-auto"> Search for Rapid API
+                <!-- need to set to static height -->
+                <input name="searchBarRapid" id="searchBarRapid" class="border-2 w-full" />
+                <button id="searchbtnRapid" class="border-2 w-full max-h-fit mb-3">Search!</button>
+    
+                <div id="history-buttons-Rapid" class="flex flex-col"></div>
+            </div>
             <div id="movieCard">
                 <div id="movieImage">
                 </div>
@@ -33,22 +35,23 @@
                     <h2>Title</h2>
                     <h2>Rating</h2>
                 </div>
-                <div id="cardBot">
+                <div id="cardBot"> 
                     <h3>Description</h3>
                 </div>
             </div>
         </div>
 
+        </div>
 
         <!--need to append api data here-->
         <div id="searchParameters" class="border-2 p-1">Search Parameters
             <!-- need to set to static height -->
             <form id="parameterForm">
-                <input class="checkBox">
-                <input type="checkbox" class="checkBox" id="movieType" name="movie" value="movie">
-                <label for="movieType"> Movie </label>
-                <input type="checkbox" class="checkBox" id="showType" name="Show" value="series">
-                <label for="showType"> Show </label>
+                <input class = "checkBox">
+                    <input type="checkbox" class = "checkBox" id="movieType" name="movie" value="movie">
+                    <label for="movieType"> Movie </label>
+                    <input type="checkbox" class = "checkBox" id="showType" name="Show" value="series">
+                    <label for="showType"> Show </label>
                 <br>
                 <label for="genre">Choose a genre:</label>
                 <select name="genre" id="genre" class="border-2">
