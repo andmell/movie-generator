@@ -19,10 +19,46 @@
         <p>"Bring movie magic from Hollywood to your home..."</p>
     </header>
     <main class="grid grid-cols-2 gap-4 py-10 mx-2">
-
         <div id="mainSearch" class="searchContainer shadow-lg rounded-2xl grid pt-10 border-2 border-red-800 place-content-center">
             <!-- need to set to static height -->
-            <input name="searchBar" id="searchBar" cols="20" rows="1" class="border-red-800 border-2 w-full rounded-2xl" />
+            <form id="parameterForm">
+                <input type="checkbox" class="checkBox" id="movieType" name="movie" value="movie">
+                <label for="movieType"> Movie </label>
+                <input type="checkbox" class="checkBox" id="showType" name="Show" value="series">
+                <label for="showType"> Show </label>
+                <br>
+                <label for="genre">Choose a genre:</label>
+                <select name="genre" id="genre" class="border-2">
+                    <option value="28" id="action">Action</option>
+                    <option value="10749" id="romance">Romance</option>
+                    <option value="35" id="comedy">Comedy</option>
+                    <option value="27" id="horror">Horror</option>
+                    <option value="878" id="science_fiction">Science Fiction</option>
+                    <option value="1" id="biography">Biography</option>
+                    <option value="2" id="film_noir">Film Noir</option>
+                    <option value="3" id="game_show">Game Show</option>
+                    <option value="4" id="musical">Musical</option>
+                    <option value="5" id="sport">Sport</option>
+                    <option value="6" id="short">Short</option>
+                    <option value="7" id="adult">Adult</option>
+                    <option value="12" id="adventure">Adventure</option>
+                    <option value="14" id="fantasy">Fantasy</option>
+                    <option value="16" id="animation">Animation</option>
+                    <option value="18" id="drama">Drama</option>
+                    <option value="36" id="history">History</option>
+                    <option value="37" id="western">Western</option>
+                    <option value="53" id="thriller">Thriller</option>
+                    <option value="80" id="crime">Crime</option>
+                    <option value="99" id="documentary">Documentary</option>
+                    <option value="9648" id="mystery">Mystery</option>
+                    <option value="10402" id="music">Music</option>
+                    <option value="10751" id="family">Family</option>
+                    <option value="10752" id="war">War</option>
+                    <option value="10763" id="news">News</option>
+                    <option value="10764" id="reality">Reality</option>
+                    <option value="10767" id="talk_show">Talk Show</option>
+                </select>
+            </form>
             <div id="yearrange">Release Year:
                 <select class="" name="releaseYear" aria-label="Select start year" id="releaseYear">
                     <option value="2023">2023</option>
@@ -150,6 +186,13 @@
                     <option value="1901">1901</option>
                     <option value="1900">1900</option>
                 </select>
+                <div id="searchParameters" class="shadow-lg rounded-2xl border-2 border-red-800 p-1">
+                    <div class="slidecontainer"> Rating Minimum
+                        <input type="range" oninput="ratingSelected.value = this.value" min="10" max="100" value="50"
+                        class="slider" id="myRange">
+                        <output id="ratingSelected"></output>
+                    </div>
+            </div>
             <button id="searchbtn"
                 class="btn border-red-800 border-2 w-full max-h-fit mt-3 hover:bg-red-200 rounded-2xl">Search!</button>
                 <button class="btn border-red-800 border-2 w-full max-h-fit mt-3 hover:bg-red-200 mb-3 rounded-2xl" id="clearBtn">Clear History</button>
