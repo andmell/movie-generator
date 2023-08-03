@@ -19,6 +19,7 @@
     margin: 0;
     line-height: 50px;
     text-align: center;
+
     transform: translateX(100%);
     animation: cssmarquee 15s linear infinite;
 }
@@ -36,3 +37,4 @@
         transform: translateX(-100%);
     }
 }
+
