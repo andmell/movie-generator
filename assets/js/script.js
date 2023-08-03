@@ -11,6 +11,9 @@ let seriesCheckbox = document.querySelector('#showType');
 let savedSearches = document.querySelector('#history-buttons');
 var searchButtonRapid = document.querySelector('#searchbtnRapid');
 var searchBarRapid = document.querySelector('#searchBarRapid');
+let releaseYear = document.getElementById("releaseYear");
+let releaseYearValue = releaseYear.value
+
 
 renderButtons();
 function saveSearch(movieTitle) {
@@ -150,7 +153,7 @@ function renderButtons() {
     }}
 }
 function getNowPlaying(searchedMovie){
-	var showtimesURL = `https://api.themoviedb.org/3/search/movie?query=${searchedMovie}&vote_average.gte=10&overview=/`;
+	var showtimesURL = `https://api.themoviedb.org/3/search/movie?query=${searchedMovie}&vote_average.gte=10&primary_release_year=${releaseYearValue}&overview=/`;
 	fetch(showtimesURL, {
 		headers: {
 			Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNmRlNGViNTc2ZTQxNjY2NzIxZjAxYTcxNGRkNDkwOCIsInN1YiI6IjY0Yzg0NGQxYzA0OGE5MDExY2Q3ZmZkNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gi21mwDNoFGGVyoJeEh7iCgHVuDxTYUNIMzvIDak_7I"
@@ -211,6 +214,7 @@ function getStreaming(streamingInfo){
 }
 
 searchButton.addEventListener('click', () => {
+	console.log(releaseYearValue);
 	getNowPlaying(searchBar.value);
 })
 
