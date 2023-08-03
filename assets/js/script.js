@@ -138,7 +138,7 @@ function getNowPlaying(searchedMovie){
 			if (data.results[i].original_language !== "en") continue;
 			movieCard = document.createElement('p');
 			movieCard.innerHTML =
-			`<div id="movieCard" class="border-2 rounded-2x1 border-red-800 text">
+			`<div id="movieCard" class="border-2 rounded-2x1 border-red-800 text flex flex-wrap relative">
 			    <div id="movieImage">
 				<img src="https://image.tmdb.org/t/p/original/${data.results[i].poster_path}" class="object-scale-down h-48 w-96"/>
 			</div>
