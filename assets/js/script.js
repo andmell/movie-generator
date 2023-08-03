@@ -89,7 +89,7 @@ function getNowStreaming(){
 						<h3>${data.result[i].imdbRating}</h3>
 		        </div>
 		        <div id="resultsBot">
-		            ${getStreaming(data.result[i].streamingInfo.us)}
+		            ${getNowStreaming(data.result[i].streamingInfo.us)}
 		        </div>
 
 		    </div>`
